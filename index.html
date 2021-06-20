@@ -1,40 +1,142 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css">
+	<title>reveal.js</title>
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
+	<link rel="stylesheet" href="dist/theme/black.css">
+
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="plugin/highlight/monokai.css">
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section data-background-color="aquamarine">
+				<img src="./examples/assets/typescript.png" alt="typescript">
+			</section>
+			<section data-background-color="white">
+				<h3>Typescript Type System</h3>
+				<img src="./examples/assets/typesystem.png" alt="typesystem">
+			</section>
+			<section data-background-color="white">
+				<pre><code data-trim data-noescape>
+	        let helloWorld: string = "Hello World";
+						</code></pre>
+			</section>
+			<section>
+				<section data-background-color="white">
+					<span>Create an object</span>
+					<pre><code data-trim data-noescape>
+						const user = {
+							name: "Hayes",
+							id: 0,
+						};
+							</code></pre>
+					<span>Interface declaration</span>
+					<pre><code data-trim data-noescape>
+						interface User {
+							name: string;
+							id: number;
+						}
+									</code></pre>
+					<span>TypeName after a variable declaration</span>
+					<pre><code data-trim data-noescape>
+						const user: User = {
+							name: "Hayes",
+							id: 0,
+						};
+											</code></pre>
+				</section>
+				<section data-background-color="white">
+					<span>TypeScript warning</span>
+					<pre><code data-trim data-noescape>
+						interface User {
+							name: string;
+							id: number;
+						}
+						
+						const user: User = {
+							username: "Hayes",
+						Type '{ username: string; id: number; }' is not assignable to type 'User'.
+							Object literal may only specify known properties, and 'username' does not exist in type 'User'.
+							id: 0,
+						};
+							</code></pre>
+				</section>
+				<section data-background-color="white">
+					<span>Interface declaration with classes</span>
+					<pre><code data-trim data-noescape>
+						interface User {
+							name: string;
+							id: number;
+						}
+						
+						class UserAccount {
+							name: string;
+							id: number;
+						
+							constructor(name: string, id: number) {
+								this.name = name;
+								this.id = id;
+							}
+						}
+						
+						const user: User = new UserAccount("Murphy", 1);
+					</code></pre>
+				</section>
+				<section data-background-color="white">
+					<span>Parameters and return values annotations</span>
+					<pre><code data-trim data-noescape>
+						function getAdminUser(): User {
+							//...
+						}
+						
+						function deleteUser(user: User) {
+							// ...
+						}
+					</code></pre>
+				</section>
+			</section>
+			<section>
+				<section data-background-color="aquamarine">UNIONS</section>
+				<section data-background-color="white">
+					<span>Union type declaration</span>
+					<pre><code data-trim data-noescape>
+						type MyBool = true | false;
+					</code></pre>
+					<span>Union types as the set of string or number literals</span>
+					<pre><code data-trim data-noescape>
+						type WindowStates = "open" | "closed" | "minimized";
+						type LockStates = "locked" | "unlocked";
+						type PositiveOddNumbersUnderTen = 1 | 3 | 5 | 7 | 9;
+					</code></pre>
+				</section>
+			</section>
 		</div>
+	</div>
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				hash: true,
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			hash: true,
 
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-			});
-		</script>
-	</body>
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+		});
+	</script>
+</body>
+
 </html>
