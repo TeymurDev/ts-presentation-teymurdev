@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-	<title>reveal.js</title>
+	<title>TYPESCRIPT</title>
 
 	<link rel="stylesheet" href="dist/reset.css">
 	<link rel="stylesheet" href="dist/reveal.css">
@@ -118,7 +118,105 @@
 						type PositiveOddNumbersUnderTen = 1 | 3 | 5 | 7 | 9;
 					</code></pre>
 				</section>
+				<section data-background-color="white">
+					<span>Unions with different types</span>
+					<pre><code data-trim data-noescape>
+						function getLength(obj: string | string[]) {
+							return obj.length;
+						}
+					</code></pre>
+					<span>Function returns different values</span>
+					<pre><code data-trim data-noescape>
+						function wrapInArray(obj: string | string[]) {
+							if (typeof obj === "string") {
+								return [obj];
+																				
+							} else {
+								return obj;
+							}
+						}
+					</code></pre>
+				</section>
 			</section>
+			<section>
+				<section data-background-color="aquamarine">GENERICS</section>
+				<section data-background-color="white">
+					<span>Array with generics</span>
+					<pre><code data-trim data-noescape>
+						   type StringArray = Array&ltstring&gt;;
+							 type NumberArray = Array&ltnumber&gt;;
+							 type ObjectWithNameArray = Array<{ name: string }>;
+					</code></pre>
+				</section>
+				<section data-background-color="white">
+					<span>Declaration of own types with generics</span>
+					<pre><code data-trim data-noescape>
+						interface Backpack&ltType&gt; {
+							add: (obj: Type) => void;
+							get: () => Type;
+						}
+		
+						declare const backpack: Backpack&ltstring&gt;;
+						
+						const object = backpack.get();
+						
+						backpack.add(23);
+						Argument of type 'number' is not assignable to parameter of type 'string'.
+					</code></pre>
+				</section>
+			</section>
+			<section>
+				<section data-background-color="aquamarine">STRUCTURAL TYPE SYSTEM</section>
+				<section data-background-color="white">
+					<span>Two objects have the same shape</span>
+					<pre><code data-trim data-noescape>
+						interface Point {
+							x: number;
+							y: number;
+						}
+						
+						function logPoint(p: Point) {
+							console.log(`${p.x}, ${p.y}`);
+						}
+						
+						const point = { x: 12, y: 26 };
+						logPoint(point);
+					</code></pre>
+				</section>
+				<section data-background-color="white">
+					<span>Shape-matching requires a subset of the object’s fields to match</span>
+					<pre><code data-trim data-noescape>
+						const point3 = { x: 12, y: 26, z: 89 };
+						logPoint(point3); 
+						
+						const rect = { x: 33, y: 3, width: 30, height: 80 };
+						logPoint(rect); 
+						
+						const color = { hex: "#187ABF" };
+						logPoint(color);
+						Argument of type '{ hex: string; }' is not assignable to parameter of type 'Point'.
+							Type '{ hex: string; }' is missing the following properties from type 'Point': x, y
+					</code></pre>
+				</section>
+				<section data-background-color="white">
+					<span>No difference between classes and objects</span>
+					<pre><code data-trim data-noescape>
+						class VirtualPoint {
+							x: number;
+							y: number;
+						
+							constructor(x: number, y: number) {
+								this.x = x;
+								this.y = y;
+							}
+						}
+						
+						const newVPoint = new VirtualPoint(13, 56);
+						logPoint(newVPoint); 
+					</code></pre>
+				</section>
+			</section>
+			<section data-background-color="aquamarine">THANK YOU</section>
 		</div>
 	</div>
 
